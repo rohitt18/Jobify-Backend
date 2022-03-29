@@ -27,7 +27,8 @@ const UserSchema = new mongoose.Schema({
   },
 });
 
-// Save user using mongoose midddleware [refer mongoose docs]
+
+// Save user using mongoose midddleware [refer mongoose docs] bina next() ke bhi chalta hai
 UserSchema.pre("save", async function () {
   // suggestion - use good old function() instead of arrow function
   // generate the salt & get the password
@@ -37,6 +38,8 @@ UserSchema.pre("save", async function () {
   // here this will point to the document
   this.password = await bcrypt.hash(this.password, salt);
 });
+
+
 // instance method to generate the token (JWT) [refer mongoose docs]
 UserSchema.methods.createJWT = function () { 
     // in the function we can access the document by using 'this' matlab user._id ke badle this._id
@@ -45,5 +48,15 @@ UserSchema.methods.createJWT = function () {
   });
   // we want to pass in the data we wanna send back so we'll go with id & name
 }; // ab ja ke sirf user.createJWT() karde and token will be generated.
+
+
+UserSchema.methods.comparePassword = async function(userPassword){ 
+  // this func is going to be looking for one argument & that ofc is going to be the password that's coming with a request
+  const isMatch = await bcrypt.compare(userPassword, this.password);
+  return isMatch;
+} // now we go to the auth.js & if we see that we have the user then we also wanna setup one more if() where we'll check the password
+// & if there is a user then check if the password matches by calling the method comparePassword() on user => await user.comparePassword()
+
+
 
 module.exports = mongoose.model("User", UserSchema);
