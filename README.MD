@@ -24,7 +24,7 @@ Email Validation Regex
 /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 ```
 
-#### Register User 
+#### Register User (Everything done using mongoose)
 <!-- Everything with the help of mongoose -->
 - Validate - name, email, password - with Mongoose
 - Hash Password (with bcryptjs)
