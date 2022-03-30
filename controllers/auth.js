@@ -33,7 +33,7 @@ const register = async (req, res) => {
 // And if we can findById then ofc we'll send back the user with username and token & if not we'll send back another error
 const login = async (req, res) => {
   const { email, password } = req.body;
-  if (!email || !password) {
+  if (!email || !password) { 
     throw new BadRequestError("Please provide email & password");
   }
   const user = await User.findOne({ email });
@@ -60,7 +60,7 @@ const login = async (req, res) => {
 
 
 // As far as auth, the last thing we need is auth middleware where we can verify the token
-// & if everything is correct, we get the userId & pass it along to the job routes 
+// & if everything is correct, we get the userId & name it along to the job routes 
 // iska matlab ki agar sab credentials sahi nikle toh jwt login kardega uss user ka account & will show the content accordingly
 
 

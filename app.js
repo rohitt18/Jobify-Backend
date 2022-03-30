@@ -4,7 +4,8 @@ const express = require('express');
 const app = express();
 
 // connectDB
-
+const connectDB = require('./db/connect');
+const authMiddleware = require("./middleware/auth");
 // routers
 const authRouter = require("./routes/auth");
 const jobsRouter = require("./routes/jobs");
@@ -12,7 +13,7 @@ const jobsRouter = require("./routes/jobs");
 // error handler
 const notFoundMiddleware = require("./middleware/not-found")
 const errorHandlerMiddleware = require('./middleware/error-handler');
-const connectDB = require('./db/connect');
+
 
 // const  = require("");
 
@@ -21,7 +22,7 @@ app.use(express.json());
 
 // routes
 app.use("/api/v1/auth",authRouter);
-app.use("/api/v1/jobs",jobsRouter);
+app.use("/api/v1/jobs", authMiddleware, jobsRouter);
 // app.get("/register", register)
 
 app.use(notFoundMiddleware);

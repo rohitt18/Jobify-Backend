@@ -1,9 +1,9 @@
 const express = require("express");
 const jobsRouter = express.Router();
 
-const { getAllJobs,getJob,createJob,updateJob,deleteJob } = require("../controllers/jobs");
+const { createJob,getAllJobs,getJob,updateJob,deleteJob } = require("../controllers/jobs");
 
-jobsRouter.route("/").get(getAllJobs).post(createJob);
+jobsRouter.route("/").post(createJob).get(getAllJobs);
 jobsRouter.route("/:id").get(getJob).patch(updateJob).delete(deleteJob);
 
 module.exports = jobsRouter;
