@@ -67,6 +67,7 @@ const deleteJob = async (req, res) => {
   res.status(StatusCodes.OK).json({ job }); // OR res.status(StatusCodes.OK).send(); 
 }
 
+
 module.exports = {
   getAllJobs,
   getJob,
@@ -74,3 +75,12 @@ module.exports = {
   updateJob,
   deleteJob,
 };
+
+// before deployment lets make our mongoose error responses more user-friendly
+// just like our error classes, we'll do this once & then use it in multiple projects
+// currently we have 3 mongoose errors - 
+// - Validation Errors (if the user doesn't provide one of the values this error pops up in auth)   [solved] 
+// - Duplicate (Email) (where email is unique and if not this error pops up in auth)    [solved]
+// - Cast Error (thats when the id syntax doesn't match exactly to what the mongoose is looking for & pops up in jobs)  [solved]
+
+// so we have to go to the error-handler middleware and make the changes accordingly
