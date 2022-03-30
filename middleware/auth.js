@@ -14,7 +14,12 @@ const authMiddleware = async (req,res,next) => {
     // verify token
     try {
         const payload = jwt.verify(token, process.env.JWT_SECRET);
+        // console.log(payload);
+
         // attach the user to the jobs routes
+        // const user = User.findById(payload.id).select('-password');
+        // req.user = user;    
+        // OR
         req.user = { userId: payload.userId, name: payload.name }; // if successful, it will have some kind of value & in that case ill just setup req.user = to the object in which id & username is there 
         next(); // imp to pass onto next middleware
     } catch (error) {
